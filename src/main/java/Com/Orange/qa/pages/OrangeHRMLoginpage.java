@@ -1,0 +1,47 @@
+package Com.Orange.qa.pages;
+
+import java.io.IOException;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import Com.OrangeHRM.qa.base.TestBase;
+
+public class OrangeHRMLoginpage extends TestBase {
+	
+	@FindBy(xpath = "//input[@name=\"username\"]")
+	private WebElement Username;
+	
+	@FindBy(xpath = "//input[@name=\"password\"]")
+	WebElement Password;
+	
+	@FindBy(xpath = "//button[@type=\"submit\"]")
+	WebElement Loginbutton;
+	
+	@FindBy(xpath = "//p[contains(text(),'Pooja Patel')]")
+	WebElement HomepageUsername;
+	
+	public OrangeHRMLoginpage() throws IOException {
+				
+		PageFactory.initElements(driver, this);
+	}
+	
+	
+	public boolean Validateusername(String UN, String PWD) throws InterruptedException {
+		
+		
+		Username.sendKeys(UN);
+		Thread.sleep(3000);
+		
+		Password.sendKeys(PWD);
+		Thread.sleep(3000);
+
+		Loginbutton.click();
+		
+		return HomepageUsername.isDisplayed();
+		
+	}
+	
+
+}
